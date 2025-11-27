@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fittrack-backend
+  namespace: fittrack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fittrack-backend
+  template:
+    metadata:
+      labels:
+        app: fittrack-backend
+    spec:
+      containers:
+        - name: backend
+          image: likhithachundu/fittrack-backend:latest
+          env:
+            - name: DB_HOST
+              value: fittrack-mysql # service name of MySQL
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: "Likhi@33459"
+            - name: DB_NAME
+              value: fittrack
+            - name: PORT
+              value: "5000"
+            - name: JWT_SECRET
+              value: "super_secret_key"
+          ports:
+            - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fittrack-backend
+  namespace: fittrack
+spec:
+  selector:
+    app: fittrack-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+  type: ClusterIP

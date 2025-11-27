@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: fittrack-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "Likhi@33459"
+      MYSQL_DATABASE: "fittrack"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - fittrack-net
+
+  backend:
+    image: likhithachundu/fittrack-backend:latest
+    container_name: fittrack-backend
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: "Likhi@33459"
+      DB_NAME: fittrack
+      PORT: 5000
+      JWT_SECRET: "super_secret_key"
+    depends_on:
+      - mysql
+    ports:
+      - "5000:5000"
+    networks:
+      - fittrack-net
+
+  frontend:
+    image: likhithachundu/fittrack-frontend:latest
+    container_name: fittrack-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - fittrack-net
+
+networks:
+  fittrack-net:
+
+volumes:
+  mysql-data:
