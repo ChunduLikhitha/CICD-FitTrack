@@ -1,0 +1,42 @@
+.login-page {
+  background: url("/images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-heading {
+  top: -23px;
+  position: relative;
+}
+.user-name {
+  position: relative;
+  top: -23px;
+  display: block;
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.login-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
